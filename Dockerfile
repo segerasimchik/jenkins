@@ -1,4 +1,4 @@
 FROM ubuntu
-RUN apt install nginx
+RUN apt-get install nginx
 EXPOSE 80
 CMD [ "tail -f/dev/null" ]
