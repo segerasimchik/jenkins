@@ -31,8 +31,7 @@ pipeline {
                 }
             }
         }
-        stage {
-
+        stage("Push docker image") {
             steps {
                 echo "========== Start pushing image =========="
                 sh """
