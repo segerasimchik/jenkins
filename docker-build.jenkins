@@ -14,11 +14,25 @@ pipeline {
     stages {
         stage("Create docker image") {
             steps {
+                echo "========== Docker Login =========="
+                withCredentials([usernamePassword(credentials: 'hub.docker.com', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login -u $USERNAME -p $PASSWORD
+                    """
+                }
+            }
+            steps {
                 echo "========== start building image =========="
                 dir ('./') {
-                    sh 'docker build -t seger/jenkins-nginx . '
+                    sh 'docker build -t seger/jenkins-nginx:latest . '
                     sh 'docker images'
                 }
+            }
+            steps {
+                echo "========== Start pushing image =========="
+                sh """
+                docker push seger/jenkins-nginx:latest
+                """
             }
         }
     }
