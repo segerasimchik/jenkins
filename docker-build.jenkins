@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "========== start building image =========="
                 dir ('./') {
-                    sh 'docker build . '
+                    sh 'docker build -t seger/nginx:0.1 . '
                 }
             }
         }
