@@ -12,7 +12,7 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Create docker image") {
+        stage("Docker Login") {
             steps {
                 echo "========== Docker Login =========="
                 withCredentials([usernamePassword(credentials: 'hub.docker.com', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -21,6 +21,8 @@ pipeline {
                     """
                 }
             }
+        }
+        stage("Create docker image") {
             steps {
                 echo "========== start building image =========="
                 dir ('./') {
@@ -28,6 +30,9 @@ pipeline {
                     sh 'docker images'
                 }
             }
+        }
+        stage {
+
             steps {
                 echo "========== Start pushing image =========="
                 sh """
