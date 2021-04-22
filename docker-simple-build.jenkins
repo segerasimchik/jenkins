@@ -12,6 +12,16 @@ pipeline {
         timestamps()
     }
     stages {
+        stage("Docker login") {
+           steps {
+             echo "===========+=+= Docker login =+=+============"
+             withCredentials([usernamePassword(credentialsId: 'dockerhub_seger', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+               sh """
+               docker login -u USERNAME -p PASSWORD
+               """
+             }
+           }
+        }
         stage("Some variables") {
            steps {
               sh 'pwd'
@@ -26,15 +36,16 @@ pipeline {
                 echo "========== start building image =========="
                 dir ('./') {
                     echo "$build_id"
-                    sh "docker build -t seger/jenkins-nginx:1.$build_id ."
+                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} ."
                     sh 'docker images'
                 }
             }
         }
-//        stage("Push docker image") {
-//          steps {
-//           #stoped here <--- 
-//          }
-//       }
+       stage("Push docker image") {
+         steps {
+           echo "========== Start pushing image ============="
+           sh "docker push "
+         }
+      }
     }
 }
