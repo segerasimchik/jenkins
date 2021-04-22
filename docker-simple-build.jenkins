@@ -11,7 +11,7 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Soe variables") {
+        stage("Some variables") {
            steps {
               sh 'pwd'
               sh 'whoami'
