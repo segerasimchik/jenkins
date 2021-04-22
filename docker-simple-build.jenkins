@@ -44,7 +44,7 @@ pipeline {
        stage("Push docker image") {
          steps {
            echo "========== Start pushing image ============="
-           sh "docker push "
+           sh "docker push seger/jenkins-nginx:1.${env.BUILD_ID}"
          }
       }
     }
