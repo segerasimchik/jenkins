@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo "========== start building image =========="
                 dir ('./') {
-                    sh 'docker build -t seger/jenkins-nginx:1. . '
+                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} . "
                     sh 'docker images'
                 }
             }
