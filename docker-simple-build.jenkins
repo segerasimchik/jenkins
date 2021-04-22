@@ -12,10 +12,10 @@ pipeline {
         timestamps()
     }
     stages {
-        environment {
-           build_id = "${env.BUILD_ID}"
-        }
         stage("Some variables") {
+           environment {
+              build_id = "${env.BUILD_ID}"
+           }
            steps {
               sh 'pwd'
               sh 'whoami'
