@@ -26,12 +26,8 @@ pipeline {
                 echo "========== start building image =========="
                 dir ('./') {
                     echo "$build_id"
-                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} . "
-                    sh '''
-                       docker images
-                       echo "$build_id"
-                       echo "${env.BUILD_ID}"
-                    '''
+                    sh 'docker build -t seger/jenkins-nginx:1.\"${env.BUILD_ID}\" . '
+                    sh 'docker images'
                 }
             }
         }
