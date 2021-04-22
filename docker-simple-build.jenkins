@@ -11,6 +11,12 @@ pipeline {
         timestamps()
     }
     stages {
+        stage("Soe variables") {
+           steps {
+              pwd
+              whoami
+           }
+        }
         stage("Create docker image") {
             steps {
                 echo "========== start building image =========="
