@@ -13,19 +13,20 @@ pipeline {
     }
     stages {
         stage("Some variables") {
-           environment {
-              build_id = "${env.BUILD_ID}"
-           }
            steps {
               sh 'pwd'
               sh 'whoami'
-              sh 'echo "$build_id"'
            }
         }
         stage("Create docker image") {
+            environment {
+              build_id = "${env.BUILD_ID}"
+            }
             steps {
                 echo "========== start building image =========="
                 dir ('./') {
+                    echo "$build_id"
+                    sh 'echo "$build_id"'
                     sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} . "
                     sh 'docker images'
                 }
