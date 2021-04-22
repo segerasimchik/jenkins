@@ -17,7 +17,7 @@ pipeline {
         stage("First step") {
             steps {
                 sh 'ssh root@local \'hostname\''
-                echo ${tag}
+                ${tag}
             }
             
         }
