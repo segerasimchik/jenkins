@@ -31,10 +31,10 @@ pipeline {
                 }
             }
         }
-#        stage("Push docker image") {
-#           steps {
-#            #stoped here <--- 
-#           }
-#        }
+//        stage("Push docker image") {
+//          steps {
+//           #stoped here <--- 
+//          }
+//       }
     }
 }
