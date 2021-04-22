@@ -12,11 +12,14 @@ pipeline {
         timestamps()
     }
     stages {
+        environment {
+           build_id = "${env.BUILD_ID}"
+        }
         stage("Some variables") {
            steps {
               sh 'pwd'
               sh 'whoami'
-              sh '${env.BUILD_ID}'
+              sh 'echo $build_id'
            }
         }
         stage("Create docker image") {
