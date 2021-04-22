@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage("Soe variables") {
            steps {
-              pwd
-              whoami
+              sh 'pwd'
+              sh 'whoami'
            }
         }
         stage("Create docker image") {
