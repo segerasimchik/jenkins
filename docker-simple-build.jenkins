@@ -19,7 +19,7 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
-              sh 'echo $build_id'
+              sh 'echo "$build_id"'
            }
         }
         stage("Create docker image") {
