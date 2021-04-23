@@ -6,6 +6,9 @@ pipeline {
     agent {
         label 'master'
     }
+    parameters {
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+    }
     triggers { pollSCM('* * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '2'))
@@ -15,7 +18,8 @@ pipeline {
         stage("Docker login") {
            steps {
              echo "===========+=+= Docker login =+=+============"
-             withCredentials([usernamePassword(credentialsId: 'dockerhub_seger', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+             withCredentials([
+               usernamePassword(credentialsId: 'dockerhub_seger', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                sh """
                docker login -u $USERNAME -p $PASSWORD
                """
