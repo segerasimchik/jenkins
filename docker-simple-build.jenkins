@@ -9,7 +9,7 @@ pipeline {
     parameters {
         choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
     }
-    triggers { pollSCM('* * * * *') }
+    triggers { pollSCM('H * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '2'))
         timestamps()
