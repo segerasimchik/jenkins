@@ -51,6 +51,7 @@ pipeline {
            script {
              if (params.CHOICE == 'Yes') {
                echo "[INFO] 'Yes' variant was selected. Nothing will be deployed!"
+               currentBuild.result = 'NOT_BUILT'
                return
              }
            }
