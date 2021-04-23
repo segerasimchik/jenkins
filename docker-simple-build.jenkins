@@ -43,7 +43,7 @@ pipeline {
                     sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} ."
                     sh 'docker images'
                     script {
-                      n_of_img=$(docker images -q | wc -l)
+                      n_of_img="$(docker images -q | wc -l)"
                       if ("$n_of_img" -gt "3" ) {
                         echo "$n_of_img"
                         amount="$(($n_of_img-2))"
