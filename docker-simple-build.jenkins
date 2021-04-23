@@ -7,7 +7,7 @@ pipeline {
         label 'master'
     }
     parameters {
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        choice(name: 'Dry run', choices: ['Yes', 'No'], description: 'Do you want some dry run')
     }
     triggers { pollSCM('* * * * *') }
     options {
@@ -30,7 +30,6 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
-              echo "Choice: ${params.CHOICE}"
            }
         }
         stage("Create docker image") {
@@ -48,6 +47,11 @@ pipeline {
         }
        stage("Push docker image") {
          steps {
+           echo "Choice: ${params.CHOICE}"
+           if (params.CHOICE == 'Yes') {
+             echo "[INFO] 'Yes' variant was selected. Nothing will be deployed!"
+             return
+           }
            echo "========== Start pushing image ============="
            sh "docker push seger/jenkins-nginx:1.${env.BUILD_ID}"
          }
