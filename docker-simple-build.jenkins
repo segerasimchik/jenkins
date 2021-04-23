@@ -48,10 +48,10 @@ pipeline {
        stage("Push docker image") {
          steps {
            echo "Choice: ${params.CHOICE}"
-           if (params.CHOICE == 'Yes') {
-             echo "[INFO] 'Yes' variant was selected. Nothing will be deployed!"
-             return
-           }
+           // if (params.CHOICE == 'Yes') {
+           //   echo "[INFO] 'Yes' variant was selected. Nothing will be deployed!"
+           //   return
+           // }
            echo "========== Start pushing image ============="
            sh "docker push seger/jenkins-nginx:1.${env.BUILD_ID}"
          }
