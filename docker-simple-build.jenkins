@@ -7,7 +7,7 @@ pipeline {
         label 'master'
     }
     parameters {
-        choice(defaultValue: 'No', name: 'DRY_RUN', choices: ['Yes', 'No'], description: 'Do you want some dry run')
+        choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
     }
     triggers { pollSCM('* * * * *') }
     options {
