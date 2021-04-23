@@ -7,7 +7,7 @@ pipeline {
         label 'master'
     }
     parameters {
-        choice(name: 'Dry run', choices: ['Yes', 'No'], description: 'Do you want some dry run')
+        choice(name: 'DRY_RUN', choices: ['Yes', 'No'], description: 'Do you want some dry run')
     }
     triggers { pollSCM('* * * * *') }
     options {
@@ -47,9 +47,9 @@ pipeline {
         }
        stage("Push docker image") {
          steps {
-           echo "Choice: ${params.CHOICE}"
+           echo "Choice: ${params.DRY_RUN}"
            script {
-             if (params.CHOICE == 'Yes') {
+             if (params.DRY_RUN == 'Yes') {
                echo "[INFO] 'Yes' variant was selected. Nothing will be deployed!"
                currentBuild.result = 'NOT_BUILT'
                return
