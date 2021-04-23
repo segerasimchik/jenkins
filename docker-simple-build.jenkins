@@ -45,13 +45,13 @@ pipeline {
                     script {
                       n_of_img="\$(docker images -q | wc -l)"
                       echo "$n_of_img"
-                      if ($n_of_img -gt '3') {
-                        echo "$n_of_img"
-                        amount="\$(($n_of_img-2))"
-                        echo "$amount"
-                        docker rmi -f $(docker images -q | head -n $amount)
-                        docker images
-                      }
+                      // if ($n_of_img -gt '3') {
+                      //   echo "$n_of_img"
+                      //   amount="\$(($n_of_img-2))"
+                      //   echo "$amount"
+                      //   docker rmi -f $(docker images -q | head -n $amount)
+                      //   docker images
+                      // }
                     }
                 }
             }
