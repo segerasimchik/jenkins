@@ -30,6 +30,7 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
+              echo "Choice: ${params.CHOICE}"
            }
         }
         stage("Create docker image") {
