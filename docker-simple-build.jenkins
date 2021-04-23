@@ -47,7 +47,7 @@ pipeline {
                     echo "$n_of_img"
                     if [ "$n_of_img" -gt 3 ]; then
                       echo "$n_of_img"
-                      amount="$(($n_of_img-1))"
+                      amount="$(($n_of_img-3))"
                       echo "$amount"
                       docker rmi -f $(docker images -q | head -n $amount)
                       docker images
