@@ -20,7 +20,7 @@ pipeline {
              echo "===========+=+= Docker login =+=+============"
              withCredentials([
                string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
-                 sh "docker login -u seger -p ${dockerPswd}"
+                 sh 'docker login -u seger -p $dockerPswd'
              }
            }
         }
