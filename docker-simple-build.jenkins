@@ -40,17 +40,6 @@ pipeline {
                     echo "$build_id"
                     sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} ."
                     sh 'docker images'
-                    sh '''
-                    n_of_img="$(docker images -q | wc -l)"
-                    echo "$n_of_img"
-                    if [ "$n_of_img" -gt 3 ]; then
-                      echo "$n_of_img"
-                      amount="$(($n_of_img-3))"
-                      echo "$amount"
-                      docker rmi -f $(docker images -q | head -n $amount)
-                      docker images
-                    fi
-                    '''
                 }
             }
         }
@@ -66,6 +55,17 @@ pipeline {
              else {
                echo "========== Start pushing image ============="
                sh "docker push seger/jenkins-nginx:1.${env.BUILD_ID}"
+               sh '''
+                    n_of_img="$(docker images -q | wc -l)"
+                    echo "$n_of_img"
+                    if [ "$n_of_img" -gt 3 ]; then
+                      echo "$n_of_img"
+                      amount="$(($n_of_img-3))"
+                      echo "$amount"
+                      docker rmi -f $(docker images -q | head -n $amount)
+                      docker images
+                    fi
+                    '''
              }
            }
          }
