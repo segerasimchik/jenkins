@@ -16,11 +16,15 @@ pipeline {
     }
     stages {
         stage("Docker login") {
+           environment {
+             dockerPasswd = credentials('dockerHubPasswd')
+           }
            steps {
              echo "===========+=+= Docker login =+=+============"
-             withCredentials([
-               string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
-                 sh 'docker login -u seger -p $dockerPswd'
+             
+             // withCredentials([
+             //  string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
+                 sh 'docker login -u seger -p $dockerPawswd'
              }
            }
         }
