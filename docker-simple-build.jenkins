@@ -24,7 +24,7 @@ pipeline {
              
              // withCredentials([
              //  string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
-                 sh 'docker login -u seger -p $dockerPawswd'
+                 sh 'docker login -u seger -p $dockerPasswd'
              //}
            }
         }
