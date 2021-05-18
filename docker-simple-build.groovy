@@ -8,7 +8,7 @@ pipeline {
     parameters {
         choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
         choice(name: 'Branches', choices: '''
-def command = "curl -s -u gem_4me_admin:YEdKuWGLfvdhxWfbW2ME https://api.bitbucket.org/2.0/repositories/gem_4me/gem-network-contract/refs/branches\?pagelen\=10 | jq -r '.values[].name'"
+def command = "curl -s -u gem_4me_admin:YEdKuWGLfvdhxWfbW2ME https://api.bitbucket.org/2.0/repositories/gem_4me/gem-network-contract/refs/branches | jq -r '.values[].name'"
 return  command
                             ''', description: 'Test' )
     }
