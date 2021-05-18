@@ -1,16 +1,17 @@
 // Check local properties
+
 properties([disableConcurrentBuilds()])
 
 pipeline {
+    environment {
+        branches = "curl -s -u gem_4me_admin:YEdKuWGLfvdhxWfbW2ME https://api.bitbucket.org/2.0/repositories/gem_4me/gem-network-contract/refs/branches | jq -r '.values[].name'"
+    }
     agent {
         label 'master'
     }
     parameters {
         choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
-        choice(name: 'Branches', choices: '''
-def command = "curl -s -u gem_4me_admin:YEdKuWGLfvdhxWfbW2ME https://api.bitbucket.org/2.0/repositories/gem_4me/gem-network-contract/refs/branches | jq -r '.values[].name'"
-return  command
-                            ''', description: 'Test' )
+        choice(name: 'DRY_RUN', choices: ${branches}, description: 'Test?')
     }
     triggers { pollSCM('H * * * *') }
     options {
