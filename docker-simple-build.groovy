@@ -1,4 +1,3 @@
-#!groovy
 // Check local properties
 properties([disableConcurrentBuilds()])
 
