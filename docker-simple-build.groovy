@@ -3,35 +3,13 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    environment {
-        branches = "curl -s -u gem_4me_admin:YEdKuWGLfvdhxWfbW2ME https://api.bitbucket.org/2.0/repositories/gem_4me/gem-network-contract/refs/branches | jq -r '.values[].name'"
-    }
     agent {
         label 'master'
     }
-   // parameters {
-   //     choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
-   // }
     parameters {
-         activeChoiceParam('choice1') {
-                      description('select your choice')
-                      choiceType('RADIO')
-                      groovyScript {
-                          script('return["aaa","bbb"]')
-                          fallbackScript('return ["error"]')
-                      }
-        }
-        activeChoiceReactiveParam('choice2') {
-                      description('select your choice')
-                      choiceType('RADIO')
-                      groovyScript {
-                          script(' if(choice1.equals("aaa")) { return ["a", "b"] } else {return ["aaaaaa","fffffff"] } ')
-                          fallbackScript('return ["error"]')
-                      }
-                      referencedParameter('choice1')
-        }
-
+        choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: 'Do you want some dry run?')
     }
+
     triggers { pollSCM('H * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '2'))
