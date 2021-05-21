@@ -35,7 +35,7 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
-              sh "echo $test"
+              #sh "echo $test"
            }
         }
         stage("Create docker image") {
