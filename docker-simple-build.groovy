@@ -33,6 +33,11 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
+              sh '''
+                 set -e
+                 test=213213
+                 echo $test
+                 '''
            }
         }
         stage("Create docker image") {
