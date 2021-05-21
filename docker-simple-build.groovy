@@ -38,6 +38,7 @@ pipeline {
                  test=213213
                  echo $test
                  '''
+              sh 'echo $test'
            }
         }
         stage("Create docker image") {
