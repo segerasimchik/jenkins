@@ -26,6 +26,8 @@ pipeline {
              // withCredentials([
              //  string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
                  sh 'docker login -u seger -p $dockerPasswd'
+                 sh "test=1233211"
+                 sh "echo $test"
              //}
            }
         }
@@ -33,6 +35,7 @@ pipeline {
            steps {
               sh 'pwd'
               sh 'whoami'
+              sh "echo $test"
            }
         }
         stage("Create docker image") {
