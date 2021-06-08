@@ -50,7 +50,7 @@ pipeline {
                 dir ('./') {
                    sh 'pwd'
                     echo "$build_id"
-                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} Docker/Dockerfile"
+                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} ./Docker/Dockerfile"
                     sh 'docker images'
                     sh '''
                     n_of_img="$(docker images -q | wc -l)"
