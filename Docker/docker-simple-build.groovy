@@ -22,7 +22,7 @@ pipeline {
            }
            steps {
              echo "===========+=+= Docker login =+=+============"
-             
+
              // withCredentials([
              //  string(credentialsId: 'dockerHubPasswd', variable: 'dockerPswd')]) {
                  sh 'docker login -u seger -p $dockerPasswd'
@@ -48,8 +48,9 @@ pipeline {
             steps {
                 echo "========== start building image =========="
                 dir ('./') {
+                   sh 'pwd'
                     echo "$build_id"
-                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} ."
+                    sh "docker build -t seger/jenkins-nginx:1.${env.BUILD_ID} Docker/Dockerfile"
                     sh 'docker images'
                     sh '''
                     n_of_img="$(docker images -q | wc -l)"
